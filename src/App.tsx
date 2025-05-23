@@ -1,9 +1,10 @@
-import './App.css';
+import './global.css';
+import Home from './components/Home';
 
 function App() {
   return (
     <>
-      <div className="text-4xl font-bold text-red-300">TEST</div>
+      <Home />
     </>
   );
 }
