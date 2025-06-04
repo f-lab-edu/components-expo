@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import Input from './Input';
 import { useForm } from 'react-hook-form';
-// import { EMAIL_INPUT, PHONE_INPUT } from '@/constants/input';
-import { EMAIL_INPUT, PHONE_INPUT } from '../../constants/input';
+import Input from '@/components/input/Input.tsx';
+import { EMAIL_INPUT, PHONE_INPUT } from '@/constants/input';
 
 type FormValues = {
   phone?: string;

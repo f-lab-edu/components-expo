@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Input from './Input';
+import Input from '@/components/input/Input';
 
 export default function ExhibitionInput() {
   const [disabled, setDisabled] = useState(false);
