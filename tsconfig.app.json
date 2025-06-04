@@ -3,7 +3,7 @@
     /* Absolute Path */
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["/*"],
+      "@/*": ["*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/mocks/*": ["mocks/*"],
