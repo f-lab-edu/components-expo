@@ -6,8 +6,9 @@ export default function Input({
   labelText,
   required,
   disabled,
-}: // errors,
-InputProps) {
+  errors,
+}: InputProps) {
+  const isError = errors?.[registerKey || '']?.type === 'required';
   return (
     <div className="flex items-center">
       {labelText && (
@@ -24,15 +25,14 @@ InputProps) {
       )}
       <div>
         <input
-          {...(registerKey && register ? register(registerKey) : {})}
+          {...(registerKey && register ? register(registerKey, { required }) : {})}
           type="text"
           className={`w-52 px-3 py-2 border border-[#808080] rounded-md outline-none text-sm ${
             disabled ? 'bg-gray-200 text-gray-500' : ''
-          } `}
+          } ${isError ? 'border-red-400' : ''}`}
           placeholder="placeholder..."
           disabled={disabled}
         />
-        {/* {errors?.registerKey && <p className="text-red-500">{errors}</p>} */}
       </div>
     </div>
   );
