@@ -3,6 +3,7 @@ import ExhibitionButton from './button/ExhibitionButton';
 import Layout from './common/Layout';
 import ExhibitionInput from './input/ExhibitionInput';
 import ExhibitionInputGroup from './input/ExhibitionInputGroup';
+import ExhibitionLocalModal from '@/components/modal/ExhibitionLocalModal';
 
 export default function Home() {
   const components = [
@@ -10,7 +11,7 @@ export default function Home() {
     <ExhibitionInput />,
     <ExhibitionInputGroup />,
     <ExhibitionModal />,
-    5,
+    <ExhibitionLocalModal />,
     6,
     7,
     8,
