@@ -8,7 +8,7 @@ export default function Input({
   disabled,
   errors,
 }: InputProps) {
-  const isError = errors?.[registerKey || '']?.type === 'required';
+  const isError = errors?.[registerKey || ''] ? true : false;
   return (
     <div className="flex items-center">
       {labelText && (
@@ -23,7 +23,7 @@ export default function Input({
           </label>
         </div>
       )}
-      <div>
+      <div className="flex flex-col">
         <input
           {...(registerKey && register ? register(registerKey, { required }) : {})}
           type="text"
@@ -33,6 +33,11 @@ export default function Input({
           placeholder="placeholder..."
           disabled={disabled}
         />
+        {errors?.[registerKey || ''] && (
+          <span className="text-xs text-red-300">
+            {errors?.[registerKey || '']?.message?.toString()}
+          </span>
+        )}
       </div>
     </div>
   );
