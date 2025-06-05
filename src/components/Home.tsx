@@ -1,3 +1,4 @@
+import ExhibitionModal from '@/components/modal/ExhibitionModal';
 import ExhibitionButton from './button/ExhibitionButton';
 import Layout from './common/Layout';
 import ExhibitionInput from './input/ExhibitionInput';
@@ -8,7 +9,7 @@ export default function Home() {
     <ExhibitionButton />,
     <ExhibitionInput />,
     <ExhibitionInputGroup />,
-    4,
+    <ExhibitionModal />,
     5,
     6,
     7,
