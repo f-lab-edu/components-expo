@@ -7,11 +7,12 @@
 - [ ] 버튼
 - [ ] 인풋
 - [ ] 모달
-- [ ] 토글
-- [ ] 드롭다운
-- [ ] 체크박스
-- [ ] 라디오 그룹
-- [ ] 툴팁
+- [ ] carousel(Netflix)
+- [ ] search bar(AirBnB)
+- [ ] select box(AirBnB, 여행지 선택)
+- [ ] calendar(AirBnB)
+- [ ] 인원수 체크(AirBnB)
+- [ ] 상품 아이템(AirBnB)
 - [ ] 스낵바
 - [ ] datepicker
 
