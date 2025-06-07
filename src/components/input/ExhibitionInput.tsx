@@ -18,7 +18,7 @@ export default function ExhibitionInput() {
       <Input labelText="input" required={required} disabled={disabled} />
 
       <div className="flex gap-2">
-        <p className="flex items-center space-x-1">
+        <fieldset className="flex items-center space-x-1">
           <input
             type="checkbox"
             className="outline-none"
@@ -26,8 +26,8 @@ export default function ExhibitionInput() {
             onChange={handleClickCheckbox}
           />
           <label htmlFor="disabled">disabled</label>
-        </p>
-        <p className="flex items-center space-x-1">
+        </fieldset>
+        <fieldset className="flex items-center space-x-1">
           <input
             type="checkbox"
             className="outline-none"
@@ -36,7 +36,7 @@ export default function ExhibitionInput() {
             disabled={disabled}
           />
           <label htmlFor="required">required</label>
-        </p>
+        </fieldset>
       </div>
     </div>
   );
