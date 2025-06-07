@@ -1,14 +1,8 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import Input from '@/components/input/Input.tsx';
 import { EMAIL_INPUT, PHONE_INPUT } from '@/constants/input';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-type FormValues = {
-  phone?: string;
-  email?: string;
-};
 
 const phoneRegex = /^010\d{8}$/;
 
@@ -31,21 +25,21 @@ export default function ExhibitionInputGroup() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<InputType>({
     resolver: zodResolver(InputSchema),
   });
 
-  const [data, setData] = useState('');
+  const [email, name, phone] = watch(['email', 'name', 'phone']);
 
-  const onSubmit = (data: FormValues, ev: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.stopPropagation();
-    setData(JSON.stringify(data));
   };
 
   return (
     <div className="w-full h-full flex justify-center items-center relative">
-      <form onSubmit={(ev) => handleSubmit((data) => onSubmit(data, ev))(ev)}>
+      <form onSubmit={(ev) => handleSubmit(() => onSubmit(ev))(ev)}>
         <div className="group flex flex-col p-2 gap-2">
           <Input register={register} registerKey="name" labelText="이름" />
           <Input
@@ -72,7 +66,11 @@ export default function ExhibitionInputGroup() {
           type="submit"
         />
       </form>
-      <p className="absolute bottom-3 left-1/2 -translate-x-1/2 w-full text-xs">{data}</p>
+      <ul className="absolute bottom-3 flex flex-col items-center w-full text-xs">
+        <li> name: {name}</li>
+        <li>phone: {phone}</li>
+        <li>email: {email}</li>
+      </ul>
     </div>
   );
 }
