@@ -26,6 +26,7 @@ export default function ExhibitionInputGroup() {
     register,
     handleSubmit,
     watch,
+    getValues,
     formState: { errors },
   } = useForm<InputType>({
     resolver: zodResolver(InputSchema),
@@ -35,6 +36,8 @@ export default function ExhibitionInputGroup() {
 
   const onSubmit = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.stopPropagation();
+    const values = getValues();
+    alert('formData: ' + JSON.stringify(values));
   };
 
   return (
