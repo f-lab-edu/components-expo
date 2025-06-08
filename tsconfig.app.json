@@ -3,7 +3,7 @@
     /* Absolute Path */
     "baseUrl": "./src",
     "paths": {
-      "@/*": ["/*"],
+      "@/*": ["*"],
       "@/components/*": ["components/*"],
       "@/hooks/*": ["hooks/*"],
       "@/mocks/*": ["mocks/*"],
@@ -11,7 +11,8 @@
       "@/stories/*": ["stories/*"],
       "@/tests/*": ["tests/*"],
       "@/types/*": ["types/*"],
-      "@/utils/*": ["utils/*"]
+      "@/utils/*": ["utils/*"],
+      "@/constants/*": ["constants/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
