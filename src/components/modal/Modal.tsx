@@ -41,8 +41,9 @@ export default function Modal({ children, onClose, domNode }: ModalProps) {
           }`}
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
+          onClick={() => onClose((prev) => !prev)}
         >
-          <img src={CloseIcon} onClick={() => onClose((prev) => !prev)} alt="close icon" />
+          <img src={CloseIcon} alt="close icon" />
         </div>
         {children}
       </div>
