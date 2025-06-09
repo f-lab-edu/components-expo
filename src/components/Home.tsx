@@ -7,8 +7,17 @@ export default function Home() {
     <main className="w-full h-full flex items-center justify-center">
       <div className="w-[1400px]">
         <Carousel>
-          {movies.map(({ thumbnail, ranking }) => (
-            <li key={ranking}>{<RankingMovie thumbnail={thumbnail} ranking={ranking} />}</li>
+          {movies.map(({ thumbnail, ranking, description, categories }) => (
+            <li key={ranking}>
+              {
+                <RankingMovie
+                  thumbnail={thumbnail}
+                  ranking={ranking}
+                  description={description}
+                  categories={categories}
+                />
+              }
+            </li>
           ))}
         </Carousel>
       </div>
