@@ -17,7 +17,7 @@ export default function RankingMovie({
   return (
     <>
       <section
-        className="w-56 h-64 relative p-5 transition cursor-pointer hover:scale-105"
+        className="w-56 h-64 relative p-5 transition cursor-pointer hover:scale-105 overflow-hidden rounded-md"
         onClick={handleClickMovie}
       >
         <img src={thumbnail} className="rounded-md" alt="movie thumbnail image" />
