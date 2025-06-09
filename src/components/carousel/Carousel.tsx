@@ -1,6 +1,7 @@
 import Slider, { type Settings } from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import CarouselArrow from '@/components/button/CarouselArrow';
 
 type CarouselProps = {
   children: React.ReactNode;
@@ -8,15 +9,19 @@ type CarouselProps = {
 
 export default function Carousel({ children }: CarouselProps) {
   const settings: Settings = {
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    arrows: true,
-    centerMode: true,
+    slidesToShow: 6,
+    slidesToScroll: 5,
+    draggable: true,
+    infinite: false,
+    prevArrow: <CarouselArrow />,
+    nextArrow: <CarouselArrow />,
   };
 
   return (
     <div className="slider-container">
-      <Slider {...settings}>{children}</Slider>
+      <Slider className="w-full space-x-2" {...settings}>
+        {children}
+      </Slider>
     </div>
   );
 }
