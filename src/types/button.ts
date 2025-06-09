@@ -7,4 +7,5 @@ export type ButtonProps = {
   onClick?: () => void;
   disabled?: boolean;
   size: ButtonSize;
+  customStyle?: string;
 };
