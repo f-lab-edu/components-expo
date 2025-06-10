@@ -21,7 +21,7 @@ export default function Modal({
 
   const handleClickOutSide = (e: React.MouseEvent) => {
     if (e.target === e.currentTarget && isCloseOnClickOutside) {
-      onClose((prev) => !prev);
+      onClose(false);
     }
   };
 
@@ -38,7 +38,7 @@ export default function Modal({
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
       if (e.code === 'Escape' && isCloseOnEsc) {
-        onClose((prev) => !prev);
+        onClose(false);
       }
     },
     [onClose, isCloseOnEsc]
@@ -66,7 +66,7 @@ export default function Modal({
           }`}
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
-          onClick={() => onClose((prev) => !prev)}
+          onClick={() => onClose(false)}
         >
           <img src={CloseIcon} alt="close icon" />
         </div>
