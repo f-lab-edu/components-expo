@@ -1,6 +1,6 @@
-import Modal from '@/components/modal/Modal';
+import RankingMovieDetailModal from '@/components/modal/RankingMovieDetailModal';
+import { useModal } from '@/hooks/useModal';
 import type { RankingMovieProps } from '@/types/movie';
-import { useState } from 'react';
 
 export default function RankingMovie({
   ranking,
@@ -8,17 +8,13 @@ export default function RankingMovie({
   categories,
   description,
 }: RankingMovieProps) {
-  const [modalOpen, setModalOpen] = useState(false);
-
-  const handleClickMovie = () => {
-    setModalOpen(true);
-  };
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   return (
     <>
       <section
         className="w-56 h-64 relative p-5 transition cursor-pointer hover:scale-105 overflow-hidden rounded-md"
-        onClick={handleClickMovie}
+        onClick={openModal}
       >
         <img src={thumbnail} className="rounded-md" alt="movie thumbnail image" />
         <span className="absolute bottom-3 -left-0.5 text-6xl font-bold text-stroke-white">
@@ -26,22 +22,13 @@ export default function RankingMovie({
         </span>
       </section>
 
-      {modalOpen && (
-        <Modal onClose={setModalOpen}>
-          <div className="flex flex-col w-full h-full">
-            <ul className="flex space-x-2 mb-4">
-              {categories?.map((c) => (
-                <li
-                  key={c}
-                  className="bg-slate-300 p-1 rounded-md text-gray-500 font-semibold text-sm"
-                >
-                  {c}
-                </li>
-              ))}
-            </ul>
-            <p>{description}</p>
-          </div>
-        </Modal>
+      {isModalOpen && (
+        <RankingMovieDetailModal
+          categories={categories}
+          description={description}
+          isModalOpen={isModalOpen}
+          closeModal={closeModal}
+        />
       )}
     </>
   );
