@@ -6,13 +6,19 @@ type ModalProps = {
   onClose: Dispatch<SetStateAction<boolean>>;
   children: React.ReactNode;
   domNode?: Element;
+  isCloseOnClickOutside?: boolean;
 };
 
-export default function Modal({ children, onClose, domNode }: ModalProps) {
+export default function Modal({
+  children,
+  onClose,
+  domNode,
+  isCloseOnClickOutside = true,
+}: ModalProps) {
   const [isActive, setIsActive] = useState(false);
 
   const handleClickOutSide = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
+    if (e.target === e.currentTarget && isCloseOnClickOutside) {
       onClose((prev) => !prev);
     }
   };
@@ -34,10 +40,10 @@ export default function Modal({ children, onClose, domNode }: ModalProps) {
       }`}
       onClick={handleClickOutSide}
     >
-      <div className="flex justify-center items-center w-[40%] h-[40%] p-4 bg-white relative rounded-md">
+      <div className="flex justify-center items-center w-[40%] h-[40%] bg-white relative rounded-md">
         <div
           className={`absolute right-3 top-3 border border-transparent rounded-full p-2 cursor-pointer transition ${
-            isActive ? 'bg-gray-200' : ''
+            isActive ? 'bg-gray-500' : ''
           }`}
           onMouseEnter={handleEnter}
           onMouseLeave={handleLeave}
