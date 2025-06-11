@@ -8,7 +8,7 @@ const ButtonSize = {
   xl: 'w-40 h-15 px-6 py-4',
 };
 
-export const useButton = ({ size, text, type, disabled, onClick }: ButtonProps) => {
+export const useButton = ({ size, text, type, disabled, onClick, customStyle }: ButtonProps) => {
   const buttonStyle = clsx(
     'border flex justify-center items-center rounded-md transition box-border outline-none',
     {
@@ -17,7 +17,8 @@ export const useButton = ({ size, text, type, disabled, onClick }: ButtonProps) 
       'bg-gray-200 hover:bg-gray-200 text-gray-600 cursor-not-allowed': disabled,
       'border-none hover:bg-transparent hover:font-semibold': type === 'text',
     },
-    ButtonSize[size]
+    ButtonSize[size],
+    customStyle
   );
 
   return { text, type, buttonStyle, disabled, onClick };

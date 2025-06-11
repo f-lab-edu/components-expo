@@ -1,25 +1,26 @@
-import ExhibitionButton from './button/ExhibitionButton';
-import Layout from './common/Layout';
-import ExhibitionInput from './input/ExhibitionInput';
-import ExhibitionInputGroup from './input/ExhibitionInputGroup';
+import Carousel from '@/components/carousel/Carousel';
+import RankingMovie from '@/components/movie/RankingMovie';
+import { movies } from '@/mock/data';
 
 export default function Home() {
-  const components = [
-    <ExhibitionButton />,
-    <ExhibitionInput />,
-    <ExhibitionInputGroup />,
-    4,
-    5,
-    6,
-    7,
-    8,
-    9,
-  ];
   return (
-    <main className="grid w-full h-full grid-cols-3 grid-rows-3 ">
-      {components.map((el, idx) => (
-        <Layout key={idx}> {el} </Layout>
-      ))}
+    <main className="w-full h-full flex items-center justify-center">
+      <div className="w-[1400px]">
+        <Carousel>
+          {movies.map(({ thumbnail, ranking, description, categories }) => (
+            <li key={ranking}>
+              {
+                <RankingMovie
+                  thumbnail={thumbnail}
+                  ranking={ranking}
+                  description={description}
+                  categories={categories}
+                />
+              }
+            </li>
+          ))}
+        </Carousel>
+      </div>
     </main>
   );
 }
