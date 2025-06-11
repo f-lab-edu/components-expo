@@ -7,7 +7,7 @@
 - [ ] 버튼
 - [ ] 인풋
 - [ ] 모달
-- [ ] carousel(Netflix)
+- [ ] carousel(Netflix) - 라이브러리 사용 없이 직접 구현
 - [ ] search bar(AirBnB)
 - [ ] select box(AirBnB, 여행지 선택)
 - [ ] calendar(AirBnB)
