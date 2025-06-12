@@ -1,55 +1,56 @@
 import ArrowButton from '@/components/button/ArrowButton';
-import React, { cloneElement, isValidElement, useRef, useState, type ReactElement } from 'react';
-
-export type CarouselOptions = {
-  draggable?: boolean;
-  slidesToShow?: number;
-  slidesToScroll?: number;
-  infinite?: boolean;
-  prevArrow?: React.JSX.Element;
-  nextArrow?: React.JSX.Element;
-};
-
-type CarouselContainerProps = {
-  children: React.ReactNode;
-  options?: CarouselOptions;
-};
-
-type ChildElementProps = {
-  className?: string;
-  style?: object;
-  onClick?: () => void;
-  'data-index'?: number;
-};
-type ChildProps = ReactElement<ChildElementProps>;
-type Direction = 'prev' | 'next';
+import { useCarousel } from '@/components/carousel/custom-carousel/hooks/useCarousel';
+import type {
+  CarouselContainerProps,
+  ChildElementProps,
+  ChildProps,
+  Direction,
+} from '@/components/carousel/custom-carousel/types';
+import { getValidItems } from '@/components/carousel/custom-carousel/utils/utils';
+import React, { isValidElement } from 'react';
 
 export default function CarouselContainer({ children, options }: CarouselContainerProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const wrapperRef = useRef<HTMLUListElement>(null);
-
-  const scrollSlidesCnt = options?.slidesToScroll || 1;
+  const isInfinite = options?.infinite;
   const showSlidesCnt = options?.slidesToShow || 1;
-  const childrenLength = React.Children.count(children);
 
-  const handleClickArrow = (direction: Direction) => {
-    if (direction === 'next') {
-      if (currentIndex + showSlidesCnt < childrenLength) {
-        const _newCurrentIndex = Math.min(
-          currentIndex + scrollSlidesCnt,
-          childrenLength - showSlidesCnt
-        );
+  const { items, wrapperRef, trackRef, handleNext, handlePrev, bind, itemStyle, trackStyle } =
+    useCarousel({
+      items: getValidItems({ children, visibleCount: showSlidesCnt || 1 }),
+      visibleCount: showSlidesCnt || 1,
+      infinite: isInfinite,
+    });
 
-        setCurrentIndex(_newCurrentIndex);
-      }
-    } else {
-      if (currentIndex - showSlidesCnt >= 0) {
-        setCurrentIndex((prev) => prev - scrollSlidesCnt);
-      } else {
-        setCurrentIndex(0);
-      }
-    }
-  };
+  // const scrollSlidesCnt = options?.slidesToScroll || 1;
+  // const childrenLength = React.Children.count(children);
+
+  // const [currentIndex, setCurrentIndex] = useState(isInfinite ? showSlidesCnt + 1 : 0);
+
+  // const _items = getValidItems({ children, visibleCount: options?.slidesToShow || 1 });
+  // const [items, setItems] = useState<React.ReactNode>([]);
+  // const [transition, setTransition] = useState(true);
+
+  // const handleClickArrow = (direction: Direction) => {
+  //   if (direction === 'next') {
+  //     if (currentIndex + showSlidesCnt < childrenLength) {
+  //       const _newCurrentIndex = Math.min(
+  //         currentIndex + scrollSlidesCnt,
+  //         childrenLength - showSlidesCnt
+  //       );
+
+  //       console.log('dd: ', currentIndex, ', slidesCnt: ', scrollSlidesCnt);
+
+  //       setCurrentIndex(_newCurrentIndex);
+  //     } else if (isInfinite) {
+  //       setCurrentIndex(10);
+  //     }
+  //   } else {
+  //     if (currentIndex - showSlidesCnt >= 0) {
+  //       setCurrentIndex((prev) => prev - scrollSlidesCnt);
+  //     } else {
+  //       setCurrentIndex(0);
+  //     }
+  //   }
+  // };
 
   const getArrowButton = (direction: Direction) => {
     return (
@@ -64,7 +65,8 @@ export default function CarouselContainer({ children, options }: CarouselContain
             className: `${
               (options!.prevArrow!.props as ChildElementProps).className ?? ''
             } custom-button`,
-            onClick: () => handleClickArrow(direction === 'prev' ? 'prev' : 'next'),
+            // onClick: () => handleClickArrow(direction === 'prev' ? 'prev' : 'next'),
+            onClick: direction === 'prev' ? handlePrev : handleNext,
           },
           <div
             className={`rounded-full p-3 before:relative bg-white ${
@@ -78,27 +80,34 @@ export default function CarouselContainer({ children, options }: CarouselContain
     );
   };
 
-  const getPosition = () => {
-    if (!wrapperRef.current) return;
+  // const getPosition = (needsTransition: boolean = true) => {
+  //   if (!trackRef.current) return;
 
-    const percentPerSlide = wrapperRef.current.offsetWidth / (options?.slidesToShow || 1);
-    return { transform: `translateX(-${currentIndex * percentPerSlide}px)` };
-  };
+  //   const percentPerSlide = trackRef.current.offsetWidth / (options?.slidesToShow || 1);
+  //   return {
+  //     transform: `translateX(-${currentIndex * percentPerSlide}px)`,
+  //     transition: needsTransition ? '' : 'none',
+  //   };
+  // };
+
+  // useLayoutEffect(() => {
+  //   if (trackRef.current) {
+  //     const data = isInfinite
+  //       ? [..._items.slice(-showSlidesCnt), ..._items, ..._items.slice(0, showSlidesCnt)]
+  //       : [..._items];
+  //   }
+  // }, []);
 
   return (
-    <div className="container w-full relative">
+    <div className="container flex items-center w-full relative">
       {options?.prevArrow && isValidElement(options.prevArrow) && getArrowButton('prev')}
-      <div className="wrapper w-full h-fit overflow-hidden">
-        <ul className={`flex transition duration-500`} style={getPosition()} ref={wrapperRef}>
-          {React.Children.map(children, (child, idx) =>
-            isValidElement(child)
-              ? cloneElement(child as ChildProps, {
-                  className: `${(child.props as ChildElementProps).className ?? ''} shrink-0`,
-                  style: { width: `calc(100% / ${options?.slidesToShow || 1})` },
-                  'data-index': idx,
-                })
-              : child
-          )}
+      <div className="wrapper w-full h-fit overflow-hidden" ref={wrapperRef}>
+        <ul className={`flex`} style={trackStyle} ref={trackRef} {...bind}>
+          {items.map((item, index) => (
+            <div className="flex shrink-0 " key={index} style={itemStyle}>
+              {item}
+            </div>
+          ))}
         </ul>
       </div>
       {options?.nextArrow && isValidElement(options.nextArrow) && getArrowButton('next')}
