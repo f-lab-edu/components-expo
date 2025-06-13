@@ -31,8 +31,8 @@ export default function SearchBarElement({
 
   return (
     <div
-      className={`relative rounded-4xl hover:bg-[#ebebeb] cursor-pointer overflow-hidden ${
-        activeMenu !== -1 ? 'bg-[#ebebeb]' : 'bg-white'
+      className={`relative rounded-4xl cursor-pointer overflow-hidden ${
+        activeMenu !== -1 ? 'bg-[#ebebeb] hover:bg-[#ddd]' : 'bg-white hover:bg-[#ebebeb]'
       }`}
     >
       <div
