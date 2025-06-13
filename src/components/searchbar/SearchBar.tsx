@@ -1,3 +1,4 @@
+import SearchButon from '@/components/searchbar/components/SearchButon';
 import useOutsideClick from '@/components/searchbar/hooks/useOutsideClick';
 import { useSearchBar } from '@/components/searchbar/hooks/useSearchBar';
 import React, {
@@ -61,6 +62,10 @@ export default function SearchBar({ children }: SearchBarProps) {
         }
         return child;
       })}
+
+      <div className="absolute z-20 top-1/2 right-3 translate-x-0.5 -translate-y-1/2 bg-[#FF385C] rounded-full flex justify-center items-center p-3">
+        <SearchButon />
+      </div>
     </div>
   );
 }

@@ -14,7 +14,7 @@ export default function SearchButon() {
     >
       <img className="w-4 h-4" src={search} alt="search image" />
       <span
-        className={`text-sm min-w-fit whitespace-nowrap font-semibold text-white duration-200 opacity-0 invisible ${
+        className={`text-sm min-w-fit whitespace-nowrap font-semibold text-white duration-300 opacity-0 invisible ${
           isMenuActive ? 'visible opacity-100' : ''
         }`}
       >
