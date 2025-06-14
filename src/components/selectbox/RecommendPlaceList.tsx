@@ -13,12 +13,12 @@ export default function RecommendPlaceList({ data }: RecommendPlaceListProps) {
         const { title, items } = group;
 
         return (
-          <div className="flex flex-col py-6 px-3 overflow-y-scroll">
+          <div key={`${title}-${idx}`} className="flex flex-col py-6 px-3 overflow-y-scroll">
             <span className="text-sm mb-2">{title}</span>
             <ul key={idx} className="flex flex-col space-y-2">
-              {items.map(({ itemId, itemTitle, image, description }) => (
-                <SelectBoxItem key={itemId} value={itemId}>
-                  <RecommendPlace itemTitle={itemTitle} image={image} description={description} />
+              {items.map((item) => (
+                <SelectBoxItem key={item.itemId} value={{ ...item }}>
+                  <RecommendPlace {...item} />
                 </SelectBoxItem>
               ))}
             </ul>
