@@ -1,9 +1,6 @@
 import search from '@/components/searchbar/assets/search.svg';
-import { useSearchBar } from '@/components/searchbar/hooks/useSearchBar';
 
 export default function SearchButon() {
-  const { activeMenu } = useSearchBar();
-
   const isMenuActive = activeMenu !== -1;
 
   return (

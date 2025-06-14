@@ -1,9 +1,9 @@
 import SearchButon from '@/components/searchbar/components/SearchButon';
 import useOutsideClick from '@/components/searchbar/hooks/useOutsideClick';
-import { useSearchBar } from '@/components/searchbar/hooks/useSearchBar';
 import React, {
   isValidElement,
   useRef,
+  useState,
   type Dispatch,
   type ReactElement,
   type SetStateAction,
@@ -37,8 +37,9 @@ const gridClass = (count: number) => {
 
 export default function SearchBar({ children }: SearchBarProps) {
   const childrenCount = React.Children.count(children);
-  const { activeMenu, setActiveMenu } = useSearchBar();
   const wrapperRef = useRef<HTMLDivElement>(null);
+
+  const [activeMenu, setActiveMenu] = useState(-1);
 
   useOutsideClick(wrapperRef, () => setActiveMenu(-1));
 

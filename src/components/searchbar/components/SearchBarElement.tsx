@@ -1,4 +1,3 @@
-import { useSearchBar } from '@/components/searchbar/hooks/useSearchBar';
 import type { Dispatch, SetStateAction } from 'react';
 
 type SearchBarElementProps = {
@@ -18,7 +17,6 @@ export default function SearchBarElement({
   isActiveMenu,
   setActiveMenu,
 }: SearchBarElementProps) {
-  const { activeMenu } = useSearchBar();
   const isMenuActive = activeMenu !== -1;
 
   const exceptFirstChild = !isFirstChild
