@@ -1,8 +1,10 @@
 import search from '@/components/searchbar/assets/search.svg';
 
-export default function SearchButon() {
-  const isMenuActive = activeMenu !== -1;
+type SearchButonProps = {
+  isMenuActive: boolean;
+};
 
+export default function SearchButon({ isMenuActive }: SearchButonProps) {
   return (
     <div
       className={`flex space-x-1 items-center h-4 ${
