@@ -1,4 +1,4 @@
-export type RecommendPlace = {
+export type RecommendPlaceResponse = {
   title: string;
   items: {
     itemId: string;
