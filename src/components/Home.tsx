@@ -1,26 +1,29 @@
-import Carousel from '@/components/carousel/Carousel';
-import RankingMovie from '@/components/movie/RankingMovie';
-import { movies } from '@/mock/data';
+import Selectbox from '@/components/selectbox/Selectbox';
+import type { RecommendPlace } from '@/components/selectbox/types/type';
+import { useEffect, useState } from 'react';
 
 export default function Home() {
+  /**
+   * selectbox prop
+   *
+   * 1. api로 받아온 데이터(mocks 폴더에서 import)
+   *   - data: [{
+   *       title: string,
+   *       items: RecommendPlace[]
+   *    }]
+   * TODO
+   * 2. 사용자가 검색한 목록
+   */
+
+  const [data, setData] = useState<RecommendPlace[]>([]);
+
+  useEffect(() => {
+    import('@/components/selectbox/mocks/data.json').then((res) => setData(res.default));
+  }, []);
+
   return (
     <main className="w-full h-full flex items-center justify-center">
-      <div className="w-[1400px]">
-        <Carousel>
-          {movies.map(({ thumbnail, ranking, description, categories }) => (
-            <li key={ranking}>
-              {
-                <RankingMovie
-                  thumbnail={thumbnail}
-                  ranking={ranking}
-                  description={description}
-                  categories={categories}
-                />
-              }
-            </li>
-          ))}
-        </Carousel>
-      </div>
+      <Selectbox data={data} />
     </main>
   );
 }
