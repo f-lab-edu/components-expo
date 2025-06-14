@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 type UseOutsideClickProps = {
   ref: React.RefObject<HTMLElement | null>;
-  exceptRef: React.RefObject<HTMLElement | null>;
+  excludeClickRef: React.RefObject<HTMLElement | null>;
   isCloseOnClickOutside: boolean;
   isCloseOnPressedESC: boolean;
   handler: () => void;
@@ -10,7 +10,7 @@ type UseOutsideClickProps = {
 
 export default function useOutsideClick({
   ref,
-  exceptRef,
+  excludeClickRef,
   isCloseOnClickOutside,
   isCloseOnPressedESC,
   handler,
@@ -21,7 +21,7 @@ export default function useOutsideClick({
         ref.current &&
         isCloseOnClickOutside &&
         !ref.current.contains(e.target as Node) &&
-        !exceptRef.current?.contains(e.target as Node) // 외부 클릭해도 닫히지 않을 예외 element
+        !excludeClickRef.current?.contains(e.target as Node) // 외부 클릭해도 닫히지 않을 예외 element
       ) {
         handler();
       }

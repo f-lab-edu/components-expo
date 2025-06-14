@@ -37,7 +37,7 @@ export default function Home() {
       >
         임시 selectbox
       </span>
-      <Selectbox isOpen={isOpen} setIsOpen={setIsOpen} exceptRef={ref}>
+      <Selectbox isOpen={isOpen} setIsOpen={setIsOpen} excludeClickRef={ref}>
         <RecommendPlaceList data={data} />
       </Selectbox>
     </main>

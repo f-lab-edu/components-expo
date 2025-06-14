@@ -7,7 +7,7 @@ type SelectboxProps = {
   isCloseOnPressedESC?: boolean;
   isOpen: boolean;
   setIsOpen: React.Dispatch<SetStateAction<boolean>>;
-  exceptRef: React.RefObject<HTMLElement | null>;
+  excludeClickRef: React.RefObject<HTMLElement | null>;
 };
 
 export default function Selectbox({
@@ -16,13 +16,13 @@ export default function Selectbox({
   isCloseOnPressedESC = true,
   isOpen,
   setIsOpen,
-  exceptRef,
+  excludeClickRef,
 }: SelectboxProps) {
   const ref = useRef<HTMLDivElement>(null);
 
   useOutsideClick({
     ref,
-    exceptRef,
+    excludeClickRef,
     isCloseOnClickOutside,
     isCloseOnPressedESC,
     handler: () => setIsOpen(false),
