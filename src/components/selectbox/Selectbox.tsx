@@ -31,7 +31,7 @@ export default function Selectbox({
   return (
     isOpen && (
       <div
-        className="flex flex-col py-3 pl-3 pr-1 rounded-3xl h-[540px] overflow-hidden shadow-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white"
+        className="flex flex-col py-3 pl-3 pr-1 rounded-3xl h-[540px] overflow-hidden shadow-lg absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white z-30"
         ref={ref}
       >
         {children}
