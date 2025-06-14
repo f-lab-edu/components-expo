@@ -12,7 +12,8 @@
       "@/tests/*": ["tests/*"],
       "@/types/*": ["types/*"],
       "@/utils/*": ["utils/*"],
-      "@/constants/*": ["constants/*"]
+      "@/constants/*": ["constants/*"],
+      "@/assets/*": ["assets/*"]
     },
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.app.tsbuildinfo",
     "target": "ES2020",
