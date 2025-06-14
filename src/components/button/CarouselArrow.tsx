@@ -5,7 +5,6 @@ type ArrowProps = {
 };
 
 export default function CarouselArrow({ className, style, onClick }: ArrowProps) {
-  console.log('ss: ', style);
   return (
     <div
       className={className}
