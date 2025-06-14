@@ -28,7 +28,7 @@ export default function useOutsideClick({
     };
 
     const handleKeyDownESC = (e: KeyboardEvent) => {
-      if (isCloseOnPressedESC) {
+      if (e.key === 'Escape' && isCloseOnPressedESC) {
         handler();
       }
     };
