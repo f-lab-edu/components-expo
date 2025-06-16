@@ -9,6 +9,8 @@ export type CarouselOptions = {
   nextArrow?: React.JSX.Element;
   autoPlay?: boolean;
   autoPlaySpeed?: number;
+  draggble?: boolean;
+  swipeable?: boolean;
 };
 
 export type CarouselContainerProps = {
