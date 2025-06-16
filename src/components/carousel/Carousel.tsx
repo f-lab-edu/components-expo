@@ -12,7 +12,7 @@ export default function Carousel({ children }: CarouselProps) {
     slidesToShow: 6,
     slidesToScroll: 5,
     draggable: true,
-    infinite: false,
+    infinite: true,
     prevArrow: <CarouselArrow />,
     nextArrow: <CarouselArrow />,
   };
