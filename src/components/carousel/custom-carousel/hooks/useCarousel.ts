@@ -4,14 +4,14 @@ interface UseCarouselProps<T> {
   items: T[];
   visibleCount: number;
   infinite?: boolean;
-  delay?: number; // 디바운싱 딜레이 (ms)
+  delay?: number;
 }
 
 export function useCarousel<T>({
   items,
   visibleCount,
   infinite = false,
-  delay = 400,
+  delay = 250,
 }: UseCarouselProps<T>) {
   const total = items.length;
   const extended = infinite
@@ -28,18 +28,23 @@ export function useCarousel<T>({
 
   const moveTo = useCallback(
     (i: number, withTransition = true) => {
+      setIsTransitioning(true);
+
       if (!trackRef.current || !wrapperRef.current) return;
 
       const itemWidth = wrapperRef.current.offsetWidth / visibleCount;
       trackRef.current.style.transition = withTransition ? 'transform 0.5s ease' : 'none';
       trackRef.current.style.transform = `translateX(-${itemWidth * i}px)`;
+
+      if (withTransition) {
+        setTimeout(() => setIsTransitioning(false), 600);
+      }
     },
     [visibleCount]
   );
 
   useEffect(() => {
     moveTo(index);
-    setIsTransitioning(true);
   }, [index, moveTo]);
 
   const handleTransitionEnd = () => {
