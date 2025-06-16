@@ -23,38 +23,6 @@ export default function CarouselContainer({ children, options }: CarouselContain
       autoPlay: true,
     });
 
-  // const scrollSlidesCnt = options?.slidesToScroll || 1;
-  // const childrenLength = React.Children.count(children);
-
-  // const [currentIndex, setCurrentIndex] = useState(isInfinite ? showSlidesCnt + 1 : 0);
-
-  // const _items = getValidItems({ children, visibleCount: options?.slidesToShow || 1 });
-  // const [items, setItems] = useState<React.ReactNode>([]);
-  // const [transition, setTransition] = useState(true);
-
-  // const handleClickArrow = (direction: Direction) => {
-  //   if (direction === 'next') {
-  //     if (currentIndex + showSlidesCnt < childrenLength) {
-  //       const _newCurrentIndex = Math.min(
-  //         currentIndex + scrollSlidesCnt,
-  //         childrenLength - showSlidesCnt
-  //       );
-
-  //       console.log('dd: ', currentIndex, ', slidesCnt: ', scrollSlidesCnt);
-
-  //       setCurrentIndex(_newCurrentIndex);
-  //     } else if (isInfinite) {
-  //       setCurrentIndex(10);
-  //     }
-  //   } else {
-  //     if (currentIndex - showSlidesCnt >= 0) {
-  //       setCurrentIndex((prev) => prev - scrollSlidesCnt);
-  //     } else {
-  //       setCurrentIndex(0);
-  //     }
-  //   }
-  // };
-
   const getArrowButton = (direction: Direction) => {
     return (
       <div
@@ -68,7 +36,6 @@ export default function CarouselContainer({ children, options }: CarouselContain
             className: `${
               (options!.prevArrow!.props as ChildElementProps).className ?? ''
             } custom-button`,
-            // onClick: () => handleClickArrow(direction === 'prev' ? 'prev' : 'next'),
             onClick: direction === 'prev' ? handlePrev : handleNext,
           },
           <div
@@ -82,24 +49,6 @@ export default function CarouselContainer({ children, options }: CarouselContain
       </div>
     );
   };
-
-  // const getPosition = (needsTransition: boolean = true) => {
-  //   if (!trackRef.current) return;
-
-  //   const percentPerSlide = trackRef.current.offsetWidth / (options?.slidesToShow || 1);
-  //   return {
-  //     transform: `translateX(-${currentIndex * percentPerSlide}px)`,
-  //     transition: needsTransition ? '' : 'none',
-  //   };
-  // };
-
-  // useLayoutEffect(() => {
-  //   if (trackRef.current) {
-  //     const data = isInfinite
-  //       ? [..._items.slice(-showSlidesCnt), ..._items, ..._items.slice(0, showSlidesCnt)]
-  //       : [..._items];
-  //   }
-  // }, []);
 
   return (
     <div className="container flex items-center w-full relative">
