@@ -6,6 +6,8 @@ interface UseCarouselProps<T> {
   scrollCount?: number;
   infinite?: boolean;
   delay?: number;
+  autoPlay?: boolean;
+  autoPlaySpeed?: number;
 }
 
 export function useCarousel<T>({
@@ -14,6 +16,8 @@ export function useCarousel<T>({
   scrollCount = 1,
   infinite = false,
   delay = 250,
+  autoPlay,
+  autoPlaySpeed = 3000,
 }: UseCarouselProps<T>) {
   const total = items.length;
   const extended = infinite
@@ -44,6 +48,10 @@ export function useCarousel<T>({
     },
     [visibleCount]
   );
+
+  useEffect(() => {
+    if (autoPlay) setInterval(handleNext, autoPlaySpeed);
+  }, [autoPlay]);
 
   useEffect(() => {
     moveTo(index);

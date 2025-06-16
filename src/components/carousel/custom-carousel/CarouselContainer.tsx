@@ -20,6 +20,7 @@ export default function CarouselContainer({ children, options }: CarouselContain
       visibleCount: showSlidesCnt || 1,
       scrollCount,
       infinite: isInfinite,
+      autoPlay: true,
     });
 
   // const scrollSlidesCnt = options?.slidesToScroll || 1;
