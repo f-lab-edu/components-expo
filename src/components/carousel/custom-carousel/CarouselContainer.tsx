@@ -12,11 +12,13 @@ import React, { isValidElement } from 'react';
 export default function CarouselContainer({ children, options }: CarouselContainerProps) {
   const isInfinite = options?.infinite;
   const showSlidesCnt = options?.slidesToShow || 1;
+  const scrollCount = options?.slidesToScroll || 1;
 
   const { items, wrapperRef, trackRef, handleNext, handlePrev, bind, itemStyle, trackStyle } =
     useCarousel({
       items: getValidItems({ children, visibleCount: showSlidesCnt || 1 }),
       visibleCount: showSlidesCnt || 1,
+      scrollCount,
       infinite: isInfinite,
     });
 

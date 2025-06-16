@@ -3,6 +3,7 @@ import { useRef, useState, useEffect, useCallback } from 'react';
 interface UseCarouselProps<T> {
   items: T[];
   visibleCount: number;
+  scrollCount?: number;
   infinite?: boolean;
   delay?: number;
 }
@@ -10,6 +11,7 @@ interface UseCarouselProps<T> {
 export function useCarousel<T>({
   items,
   visibleCount,
+  scrollCount = 1,
   infinite = false,
   delay = 250,
 }: UseCarouselProps<T>) {
@@ -79,11 +81,11 @@ export function useCarousel<T>({
   };
 
   const handleNext = () => {
-    debouncedAction(() => setIndex((prev) => prev + 1));
+    debouncedAction(() => setIndex((prev) => prev + scrollCount));
   };
 
   const handlePrev = () => {
-    debouncedAction(() => setIndex((prev) => prev - 1));
+    debouncedAction(() => setIndex((prev) => prev - scrollCount));
   };
 
   const getItemStyle = () => {
