@@ -20,7 +20,10 @@ export default function CarouselContainer({ children, options }: CarouselContain
       visibleCount: showSlidesCnt || 1,
       scrollCount,
       infinite: isInfinite,
-      autoPlay: true,
+      autoPlay: options?.autoPlay,
+      autoPlaySpeed: options?.autoPlaySpeed,
+      draggable: options?.draggable,
+      swipeable: options?.swipeable,
     });
 
   const getArrowButton = (direction: Direction) => {

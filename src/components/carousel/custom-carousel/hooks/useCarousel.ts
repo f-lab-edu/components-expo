@@ -8,6 +8,8 @@ interface UseCarouselProps<T> {
   delay?: number;
   autoPlay?: boolean;
   autoPlaySpeed?: number;
+  draggable?: boolean;
+  swipeable?: boolean;
 }
 
 export function useCarousel<T>({
@@ -18,6 +20,8 @@ export function useCarousel<T>({
   delay = 250,
   autoPlay,
   autoPlaySpeed = 3000,
+  draggable,
+  swipeable,
 }: UseCarouselProps<T>) {
   const total = items.length;
   const extended = infinite
@@ -25,8 +29,13 @@ export function useCarousel<T>({
     : [...items];
 
   const [index, setIndex] = useState(infinite ? visibleCount : 0);
+  /** inifinite scroll 시 transition */
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isResetting, setIsResetting] = useState(false);
+
+  /** draggable */
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
 
   const trackRef = useRef<HTMLUListElement>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -56,6 +65,102 @@ export function useCarousel<T>({
   useEffect(() => {
     moveTo(index);
   }, [index, moveTo]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const handleMouseDown = (e: MouseEvent) => {
+      setIsDragging(true);
+      setStartX(e.pageX - track.offsetLeft);
+    };
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging || !trackRef.current || !wrapperRef.current) return;
+
+      const delta = e.pageX - startX; // 오른쪽 드래그 시 양수
+      const itemWidth = wrapperRef.current.offsetWidth / visibleCount;
+
+      const baseOffset = -index * itemWidth;
+      const newOffset = baseOffset + delta;
+
+      trackRef.current.style.transition = 'none';
+      trackRef.current.style.transform = `translateX(${newOffset}px)`;
+    };
+
+    const handleMouseUp = (e: MouseEvent) => {
+      if (!isDragging || !trackRef.current || !wrapperRef.current) return;
+
+      setIsDragging(false);
+
+      let deltaX, direction;
+
+      if (startX <= e.pageX) {
+        direction = '-';
+        deltaX = e.pageX - startX;
+      } else {
+        direction = '+';
+        deltaX = startX - e.pageX;
+      }
+
+      const itemWidth = wrapperRef.current.offsetWidth / visibleCount;
+      const movedItems = Math.round(deltaX / itemWidth);
+
+      if (movedItems !== 0) {
+        setIndex((prev) => {
+          return prev + (direction === '-' ? movedItems * -1 : movedItems);
+        });
+      } else {
+        moveTo(index); // 드래그가 짧으면 원복
+      }
+    };
+
+    if (draggable) {
+      if (isDragging) {
+        track.style.userSelect = 'none';
+      } else {
+        track.style.userSelect = '';
+      }
+
+      // 이벤트 등록
+      track.addEventListener('mousedown', handleMouseDown);
+      window.addEventListener('mousemove', handleMouseMove, { passive: false });
+      window.addEventListener('mouseup', handleMouseUp);
+
+      // 정리
+      return () => {
+        track.removeEventListener('mousedown', handleMouseDown);
+        window.removeEventListener('mousemove', handleMouseMove);
+        window.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, startX]);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    let lastWheel = 0;
+
+    const handleWheel = (e: WheelEvent) => {
+      const now = Date.now(); // 1970년 1월 1일 00:00:00 UTC부터 지금까지의 시간을 밀리초(ms) 단위로 반환
+
+      if (now - lastWheel < 1000) return; // 디바운스
+
+      if (e.deltaX > 20) {
+        handleNext();
+      } else if (e.deltaX < -20) {
+        handlePrev();
+      }
+
+      lastWheel = now;
+    };
+
+    if (swipeable) {
+      track.addEventListener('wheel', handleWheel);
+      return () => track.removeEventListener('wheel', handleWheel);
+    }
+  }, []);
 
   const handleTransitionEnd = () => {
     setIsTransitioning(false);
