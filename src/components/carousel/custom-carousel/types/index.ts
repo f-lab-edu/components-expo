@@ -7,6 +7,8 @@ export type CarouselOptions = {
   infinite?: boolean;
   prevArrow?: React.JSX.Element;
   nextArrow?: React.JSX.Element;
+  autoPlay?: boolean;
+  autoPlaySpeed?: number;
 };
 
 export type CarouselContainerProps = {
