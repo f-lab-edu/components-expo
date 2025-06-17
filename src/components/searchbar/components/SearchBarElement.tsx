@@ -3,31 +3,29 @@ import type { Dispatch, SetStateAction } from 'react';
 type SearchBarElementProps = {
   title: string;
   content: string | React.ReactNode;
-  index?: number;
-  isFirstChild?: boolean;
-  isActiveMenu?: boolean;
+  index: number;
   activeMenu: number;
-  setActiveMenu?: Dispatch<SetStateAction<number>>;
+  onClick?: Dispatch<SetStateAction<number>>;
 };
 
 export default function SearchBarElement({
   title,
   content,
   index,
-  isFirstChild,
-  isActiveMenu,
   activeMenu,
-  setActiveMenu,
+  onClick,
 }: SearchBarElementProps) {
+  const isActiveMenu = index === activeMenu;
   const isMenuActive = activeMenu !== -1;
 
-  const exceptFirstChild = !isFirstChild
-    ? "relative before:content-['|'] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:text-gray-300"
-    : '';
+  const exceptFirstChild =
+    index !== 0
+      ? "relative before:content-['|'] before:absolute before:left-0 before:top-1/2 before:-translate-y-1/2 before:text-gray-300"
+      : '';
 
   const handleClickElement = () => {
-    if (setActiveMenu) {
-      setActiveMenu(index!);
+    if (onClick) {
+      onClick(index);
     }
   };
 
