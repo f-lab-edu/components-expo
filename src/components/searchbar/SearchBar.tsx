@@ -1,24 +1,7 @@
+import SearchBarElement from '@/components/searchbar/components/SearchBarElement';
 import SearchButon from '@/components/searchbar/components/SearchButon';
 import useOutsideClick from '@/components/searchbar/hooks/useOutsideClick';
-import { useSearchBar } from '@/components/searchbar/hooks/useSearchBar';
-import React, {
-  isValidElement,
-  useRef,
-  type Dispatch,
-  type ReactElement,
-  type SetStateAction,
-} from 'react';
-
-type SearchBarProps = {
-  children: React.ReactNode;
-};
-
-type SearchBarElementProps = {
-  index?: number;
-  isFirstChild: boolean;
-  isActiveMenu: boolean;
-  setActiveMenu: Dispatch<SetStateAction<number>>;
-};
+import React, { useRef, useState } from 'react';
 
 const gridClass = (count: number) => {
   switch (count) {
@@ -35,10 +18,14 @@ const gridClass = (count: number) => {
   }
 };
 
-export default function SearchBar({ children }: SearchBarProps) {
-  const childrenCount = React.Children.count(children);
-  const { activeMenu, setActiveMenu } = useSearchBar();
+type SearchBarProps = {
+  elements: { title: string; content: string | React.ReactNode }[];
+};
+
+export default function SearchBar({ elements }: SearchBarProps) {
   const wrapperRef = useRef<HTMLDivElement>(null);
+  const [activeMenu, setActiveMenu] = useState(-1);
+  const isMenuActive = activeMenu !== -1;
 
   useOutsideClick(wrapperRef, () => setActiveMenu(-1));
 
@@ -46,25 +33,22 @@ export default function SearchBar({ children }: SearchBarProps) {
     <div
       ref={wrapperRef}
       className={`w-[60%] grid gap-2 relative ${gridClass(
-        childrenCount
+        elements.length
       )} box-border border border-gray-300 shadow-lg rounded-4xl overflow-hidden ${
         activeMenu !== -1 ? 'bg-[#ebebeb]' : ''
       }`}
     >
-      {React.Children.map(children, (child, idx) => {
-        if (isValidElement(child)) {
-          return React.cloneElement(child as ReactElement<SearchBarElementProps>, {
-            index: idx,
-            isFirstChild: idx === 0,
-            isActiveMenu: activeMenu === idx,
-            setActiveMenu,
-          });
-        }
-        return child;
-      })}
-
+      {elements.map((searchbar, idx) => (
+        <SearchBarElement
+          key={searchbar.title}
+          index={idx}
+          activeMenu={activeMenu}
+          onClick={setActiveMenu}
+          {...searchbar}
+        />
+      ))}
       <div className="absolute z-20 top-1/2 right-3 translate-x-0.5 -translate-y-1/2 bg-[#FF385C] rounded-full flex justify-center items-center p-3">
-        <SearchButon />
+        <SearchButon isMenuActive={isMenuActive} />
       </div>
     </div>
   );
