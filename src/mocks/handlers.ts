@@ -5,9 +5,20 @@ type UpdateRequest = {
 };
 
 export const handlers = [
-  http.get('/api/lodgings', async () => {
-    const data = (await import('@/mocks/lodgings.json')).default;
-    return HttpResponse.json({ data, statusCode: 200, message: 'success' });
+  http.get('/api/lodgings', async ({ request }) => {
+    const offset = parseInt(request.url.split('?offset=')[1]);
+    console.log('OFFSET: ', offset);
+    const start = offset;
+    const end = offset + 10;
+    const data = (await import('@/mocks/lodgings.json')).default.slice(start, end);
+
+    return HttpResponse.json({
+      data,
+      statusCode: 200,
+      message: 'success',
+      hasNext: offset < 10 ? true : false,
+      nextOffset: offset < 10 ? offset + 10 : undefined,
+    });
   }),
 
   http.put('/api/lodgings', async ({ request }) => {
