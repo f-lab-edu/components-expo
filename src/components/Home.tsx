@@ -21,6 +21,10 @@ export default function Home() {
 
   return (
     <main className="w-full h-full flex flex-col justify-center items-center space-y-20 py-20">
+      <a href="/test" className="px-6 py-2 rounded-2xl shadow-lg">
+        react-query Infinite scroll
+      </a>
+
       <SearchBar elements={searchbarElements} />
 
       <div className="w-[1400px] space-y-6" ref={containerRef}>
