@@ -16,7 +16,7 @@ export default function LodgingTest() {
             fetchNextPage();
           }
         },
-        { root: containerRef.current, threshold: 1 }
+        { root: containerRef.current, threshold: 0.8 }
       );
 
       if (targetRef.current) observer.observe(targetRef.current);
