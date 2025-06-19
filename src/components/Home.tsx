@@ -5,21 +5,15 @@ import { searchbarElements } from '@/components/searchbar/mocks/searchbar';
 import { useGetLodgingList } from '@/components/lodging/hooks/useGetLodgingList';
 import type { LodgingProps } from '@/components/lodging/types/lodging';
 import Lodging from '@/components/lodging/Lodging';
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import SkeletonLodging from '@/components/lodging/SkeletonLodging';
 import { LODGING_WIDTH } from '@/components/lodging/constants/constant';
+import { useSkeletonUI } from '@/components/lodging/hooks/useSkeletonUI';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [skeletonCount, setSkeletonCount] = useState(0);
   const { lodging, error, isLoading } = useGetLodgingList<LodgingProps>();
-
-  useEffect(() => {
-    if (!containerRef.current) return;
-
-    const count = Math.floor(containerRef.current.offsetWidth / LODGING_WIDTH);
-    setSkeletonCount(count);
-  }, []);
+  const { skeletonCount } = useSkeletonUI({ containerRef, itemWidth: LODGING_WIDTH });
 
   if (error) return <>Something Error happen</>;
 
