@@ -1,6 +1,5 @@
-import { StrictMode } from 'react';
+import Root from '@/Root.tsx';
 import { createRoot } from 'react-dom/client';
-import App from './App.tsx';
 
 async function enableMocking() {
   if (process.env.NODE_ENV !== 'development') {
@@ -12,9 +11,5 @@ async function enableMocking() {
 }
 
 enableMocking().then(() => {
-  createRoot(document.getElementById('root')!).render(
-    <StrictMode>
-      <App />
-    </StrictMode>
-  );
+  createRoot(document.getElementById('root')!).render(<Root />);
 });
