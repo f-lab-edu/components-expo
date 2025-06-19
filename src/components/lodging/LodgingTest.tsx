@@ -1,24 +1,43 @@
-import { useGetLodgingList } from '@/components/lodging/hooks/useGetLodgingList';
 import { useInfiniteScroll } from '@/components/lodging/hooks/useInfiniteScroll';
 import Lodging from '@/components/lodging/Lodging';
 import type { LodgingProps } from '@/components/lodging/types/lodging';
-import { useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 export default function LodgingTest() {
-  const { lodging } = useGetLodgingList<LodgingProps>();
+  const containerRef = useRef<HTMLUListElement>(null);
   const targetRef = useRef<HTMLDivElement>(null);
-  const [currentPage, setCurrentPage] = useState(0);
+  const { lodging, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteScroll();
 
-  useInfiniteScroll();
+  console.log('lodging: ', lodging);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+          fetchNextPage();
+        }
+      },
+      { root: containerRef.current, threshold: 1 }
+    );
+
+    if (targetRef.current) observer.observe(targetRef.current);
+    return () => observer.disconnect();
+  }, [targetRef.current, hasNextPage, fetchNextPage]);
 
   return (
     <div className="w-full h-full flex justify-center items-center bg-amber-100 overflow-hidden">
-      <ul className="h-full grid grid-cols-2 gap-2 overflow-y-scroll">
-        {lodging.map((el) => (
-          <li key={el.id}>
-            <Lodging {...el} />
-          </li>
-        ))}
+      <ul className="h-full grid grid-cols-2 gap-2 overflow-y-scroll" ref={containerRef}>
+        {lodging?.pages?.map((group, i) => {
+          return (
+            <React.Fragment key={i}>
+              {(group.data as LodgingProps[]).map((lodging) => (
+                <li key={lodging.id}>
+                  <Lodging {...lodging} />
+                </li>
+              ))}
+            </React.Fragment>
+          );
+        })}
         <div ref={targetRef}></div>
       </ul>
     </div>
