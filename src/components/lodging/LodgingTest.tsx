@@ -8,20 +8,22 @@ export default function LodgingTest() {
   const targetRef = useRef<HTMLDivElement>(null);
   const { lodging, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteScroll();
 
-  console.log('lodging: ', lodging);
-
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-          fetchNextPage();
-        }
-      },
-      { root: containerRef.current, threshold: 1 }
-    );
+    const timer = setTimeout(() => {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
+            fetchNextPage();
+          }
+        },
+        { root: containerRef.current, threshold: 1 }
+      );
 
-    if (targetRef.current) observer.observe(targetRef.current);
-    return () => observer.disconnect();
+      if (targetRef.current) observer.observe(targetRef.current);
+      return () => observer.disconnect();
+    }, 500);
+
+    return () => clearTimeout(timer);
   }, [targetRef.current, hasNextPage, fetchNextPage]);
 
   return (
