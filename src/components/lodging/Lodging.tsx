@@ -1,5 +1,6 @@
 import type { LodgingProps } from '@/components/lodging/types/lodging';
 import Heart from '@/components/lodging/assets/heart.svg';
+import FilledHeart from '@/components/lodging/assets/filledHeart.svg';
 
 export default function Lodging({
   id,
@@ -11,11 +12,12 @@ export default function Lodging({
   title,
   totalPrice,
   usingDate,
+  onClick,
 }: LodgingProps) {
   const handleClickLodging = () => {};
 
   const handleClickLike = () => {
-    console.log(`you like ${id} lodging`);
+    if (onClick) onClick(id);
   };
 
   return (
@@ -27,13 +29,13 @@ export default function Lodging({
             게스트 선호
           </span>
         )}
-        {isLiked && (
+        {
           <img
-            src={Heart}
+            src={isLiked ? FilledHeart : Heart}
             className="absolute top-3 right-3 hover:scale-110"
             onClick={handleClickLike}
           />
-        )}
+        }
       </div>
       <div className="flex flex-col">
         <h3 className="">{title}</h3>
