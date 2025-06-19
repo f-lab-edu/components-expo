@@ -8,4 +8,5 @@ export type LodgingProps = {
   rate: number;
   days: string; // 일수+단위, eg, 2박
   isGuestPreferred: boolean;
+  onClick?: (id: string) => void;
 };
