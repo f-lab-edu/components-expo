@@ -108,5 +108,115 @@
     "rate": 4.0,
     "days": "1박",
     "isGuestPreferred": false
+  },
+  {
+    "id": "11",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "서울 강남 호텔",
+    "usingDate": "9월 1일~2일",
+    "totalPrice": "₩120,000",
+    "rate": 4.5,
+    "days": "1박",
+    "isGuestPreferred": true
+  },
+  {
+    "id": "12",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": false,
+    "title": "부산 해운대 리조트",
+    "usingDate": "9월 10일~12일",
+    "totalPrice": "₩350,000",
+    "rate": 4.8,
+    "days": "2박",
+    "isGuestPreferred": true
+  },
+  {
+    "id": "13",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "제주 오션뷰 펜션",
+    "usingDate": "9월 15일~17일",
+    "totalPrice": "₩280,000",
+    "rate": 4.2,
+    "days": "2박",
+    "isGuestPreferred": false
+  },
+  {
+    "id": "14",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": false,
+    "title": "속초 시티 호텔",
+    "usingDate": "9월 3일~4일",
+    "totalPrice": "₩90,000",
+    "rate": 3.9,
+    "days": "1박",
+    "isGuestPreferred": false
+  },
+  {
+    "id": "15",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "강릉 바다뷰 호텔",
+    "usingDate": "9월 20일~22일",
+    "totalPrice": "₩310,000",
+    "rate": 4.6,
+    "days": "2박",
+    "isGuestPreferred": true
+  },
+  {
+    "id": "16",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": false,
+    "title": "전주 한옥스테이",
+    "usingDate": "9월 12일~13일",
+    "totalPrice": "₩150,000",
+    "rate": 4.3,
+    "days": "1박",
+    "isGuestPreferred": true
+  },
+  {
+    "id": "17",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "경주 역사호텔",
+    "usingDate": "9월 5일~7일",
+    "totalPrice": "₩270,000",
+    "rate": 4.1,
+    "days": "2박",
+    "isGuestPreferred": false
+  },
+  {
+    "id": "18",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "인천 공항 근처 숙소",
+    "usingDate": "9월 8일~9일",
+    "totalPrice": "₩110,000",
+    "rate": 3.7,
+    "days": "1박",
+    "isGuestPreferred": false
+  },
+  {
+    "id": "19",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": false,
+    "title": "남해 힐링 리조트",
+    "usingDate": "9월 25일~27일",
+    "totalPrice": "₩400,000",
+    "rate": 4.9,
+    "days": "2박",
+    "isGuestPreferred": true
+  },
+  {
+    "id": "20",
+    "image": "https://a0.muscache.com/im/pictures/410f0387-7673-4ade-8b3d-32e142b20227.jpg?im_w=720",
+    "isLiked": true,
+    "title": "대전 비즈니스 호텔",
+    "usingDate": "9월 18일~19일",
+    "totalPrice": "₩130,000",
+    "rate": 4.0,
+    "days": "1박",
+    "isGuestPreferred": false
   }
 ]
