@@ -6,8 +6,7 @@ type UpdateRequest = {
 
 export const handlers = [
   http.get('/api/lodgings', async ({ request }) => {
-    const offset = parseInt(request.url.split('?offset=')[1]);
-    console.log('OFFSET: ', offset);
+    const offset = parseInt(request.url.split('?offset=')?.[1]) || 0;
     const start = offset;
     const end = offset + 10;
     const data = (await import('@/mocks/lodgings.json')).default.slice(start, end);
