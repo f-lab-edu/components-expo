@@ -1,4 +1,3 @@
-import RecommendPlaceList from '@/components/selectbox/RecommendPlaceList';
 import Selectbox from '@/components/selectbox/Selectbox';
 import type { RecommendPlaceResponse } from '@/components/selectbox/types/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -7,6 +6,7 @@ import SearchBar from '@/components/searchbar/SearchBar';
 import Carousel from '@/components/carousel/Carousel';
 import RankingMovie from '@/components/movie/RankingMovie';
 import { movies } from '@/mock/data';
+import RecommendPlace from '@/components/selectbox/RecommendPlace';
 import { searchbarElements } from '@/components/searchbar/mocks/searchbar';
 
 export default function Home() {
@@ -44,7 +44,17 @@ export default function Home() {
         임시 selectbox
       </span>
       <Selectbox isOpen={isOpen} setIsOpen={setIsOpen} excludeClickRef={ref}>
-        <RecommendPlaceList data={data} />
+        {data.map(({ title, items }, idx) => {
+          return (
+            <Selectbox.Group title={title}>
+              {items.map((item) => (
+                <Selectbox.option key={idx} value={item}>
+                  <RecommendPlace {...item} />
+                </Selectbox.option>
+              ))}
+            </Selectbox.Group>
+          );
+        })}
       </Selectbox>
 
       <SearchBar elements={searchbarElements} />
