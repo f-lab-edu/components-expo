@@ -1,0 +1,67 @@
+[
+  {
+    "title": "추천 여행지",
+    "items": [
+      {
+        "itemId": "1",
+        "image": "",
+        "itemTitle": "서울 남산타워",
+        "description": "서울의 전경을 한눈에 볼 수 있는 낭만적인 전망대입니다."
+      },
+      {
+        "itemId": "2",
+        "image": "",
+        "itemTitle": "경복궁",
+        "description": "조선시대의 아름다움을 간직한 대표적인 고궁입니다."
+      },
+      {
+        "itemId": "3",
+        "image": "",
+        "itemTitle": "홍대 거리",
+        "description": "예술과 자유분위기가 넘치는 젊음의 거리입니다."
+      },
+      {
+        "itemId": "4",
+        "image": "",
+        "itemTitle": "제주 성산일출봉",
+        "description": "일출 명소로 유명한 유네스코 세계자연유산입니다."
+      },
+      {
+        "itemId": "5",
+        "image": "",
+        "itemTitle": "부산 광안리 해변",
+        "description": "야경이 아름다운 광안대교를 감상할 수 있는 해변입니다."
+      },
+      {
+        "itemId": "6",
+        "image": "",
+        "itemTitle": "여의도 한강공원",
+        "description": "서울 시민들의 휴식처, 한강변의 여유로움을 즐겨보세요."
+      },
+      {
+        "itemId": "7",
+        "image": "",
+        "itemTitle": "인천 차이나타운",
+        "description": "한국 속 작은 중국, 다양한 먹거리와 볼거리가 가득한 곳."
+      },
+      {
+        "itemId": "8",
+        "image": "",
+        "itemTitle": "강릉 안목 해변",
+        "description": "카페거리와 바다가 어우러진 감성 여행지입니다."
+      },
+      {
+        "itemId": "9",
+        "image": "",
+        "itemTitle": "전주 한옥마을",
+        "description": "전통과 현대가 공존하는 매력적인 문화 공간입니다."
+      },
+      {
+        "itemId": "10",
+        "image": "",
+        "itemTitle": "대전 스카이로드",
+        "description": "미디어아트와 쇼핑이 함께하는 도심 속 이색 거리입니다."
+      }
+    ]
+  }
+]
