@@ -14,7 +14,7 @@ export function useGetLodgingList<T>() {
 
   return {
     ...rest,
-    lodging: data?.data ?? [],
+    lodgings: data?.data ?? [],
     statusCode: data?.statusCode,
     message: data?.message,
   };

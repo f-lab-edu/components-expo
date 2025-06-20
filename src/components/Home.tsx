@@ -13,7 +13,7 @@ import { useUpdateLodgingLike } from '@/components/lodging/hooks/useUpdateLodgin
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { lodging, error, isLoading } = useGetLodgingList<LodgingProps>();
+  const { lodgings, error, isLoading } = useGetLodgingList<LodgingProps>();
   const { mutate: updateLikeLodging } = useUpdateLodgingLike();
   const { skeletonCount } = useSkeletonUI({ containerRef, itemWidth: LODGING_WIDTH });
 
@@ -31,7 +31,7 @@ export default function Home() {
         <Carousel>
           {isLoading
             ? Array.from({ length: skeletonCount }).map(() => <SkeletonLodging />)
-            : lodging.map((el) => {
+            : lodgings.map((el) => {
                 return (
                   <li key={el.id}>
                     <Lodging {...el} onClick={() => updateLikeLodging(el.id)} />
