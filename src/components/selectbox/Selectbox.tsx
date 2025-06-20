@@ -1,4 +1,6 @@
+import SelectboxOption from '@/components/selectbox/components/SelectBoxOption';
 import useOutsideClick from '@/components/selectbox/hooks/useOutsideClick';
+import SelectboxGroup from '@/components/selectbox/SelectboxGroup';
 import { useRef, type SetStateAction } from 'react';
 
 type SelectboxProps = {
@@ -10,14 +12,14 @@ type SelectboxProps = {
   excludeClickRef: React.RefObject<HTMLElement | null>;
 };
 
-export default function Selectbox({
+const Selectbox = ({
   children,
   isCloseOnClickOutside = true,
   isCloseOnPressedESC = true,
   isOpen,
   setIsOpen,
   excludeClickRef,
-}: SelectboxProps) {
+}: SelectboxProps) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useOutsideClick({
@@ -38,4 +40,9 @@ export default function Selectbox({
       </div>
     )
   );
-}
+};
+
+Selectbox.Group = SelectboxGroup;
+Selectbox.option = SelectboxOption;
+
+export default Selectbox;
