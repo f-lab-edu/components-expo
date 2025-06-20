@@ -3,11 +3,11 @@ import Selectbox from '@/components/selectbox/Selectbox';
 import type { RecommendPlaceResponse } from '@/components/selectbox/types/type';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import SearchBar from '@/components/searchbar/SearchBar';
-import SearchBarElement from '@/components/searchbar/components/SearchBarElement';
 
 import Carousel from '@/components/carousel/Carousel';
 import RankingMovie from '@/components/movie/RankingMovie';
 import { movies } from '@/mock/data';
+import { searchbarElements } from '@/components/searchbar/mocks/searchbar';
 
 export default function Home() {
   /**
@@ -47,15 +47,7 @@ export default function Home() {
         <RecommendPlaceList data={data} />
       </Selectbox>
 
-      <SearchBar>
-        <SearchBarElement
-          title="여행지"
-          content={<input className=" outline-none" type="text" placeholder="여행지 검색" />}
-        />
-        <SearchBarElement title="체크인" content="날짜 추가" />
-        <SearchBarElement title="체크아웃" content="날짜 추가" />
-        <SearchBarElement title="여행자" content="게스트 추가" />
-      </SearchBar>
+      <SearchBar elements={searchbarElements} />
 
       <div className="w-[1400px]">
         <Carousel>
