@@ -1,11 +1,11 @@
 import type { RecommendPlaceResponse } from '@/components/selectbox/types/type';
 
-type SelectBoxItemProps = {
+type SelectBoxOptionProps = {
   children: React.ReactNode;
   value: RecommendPlaceResponse['items'][number];
 };
 
-export default function SelectBoxItem({ children, value }: SelectBoxItemProps) {
+export default function SelectboxOption({ children, value }: SelectBoxOptionProps) {
   const { itemId, itemTitle } = value;
 
   const handleClickItem = () => {
