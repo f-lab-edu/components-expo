@@ -7,7 +7,7 @@ import SearchBar from '@/components/searchbar/SearchBar';
 import Carousel from '@/components/carousel/Carousel';
 import RankingMovie from '@/components/movie/RankingMovie';
 import { movies } from '@/mock/data';
-import { searchbarElements } from '@/components/searchbar/mocks/searchbar';
+import { searchbarElements } from '@/components/searchbar/constants/searchbar';
 
 export default function Home() {
   /**
