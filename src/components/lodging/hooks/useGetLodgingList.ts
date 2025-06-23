@@ -12,7 +12,7 @@ const fetchLodgingList = async <T>(): Promise<ApiResponse<T>> => {
 
 export function useGetLodgingList<T, E = Error>() {
   const { data, ...rest } = useQuery<ApiResponse<T>, E>({
-    queryKey: ['get-lodgings'],
+    queryKey: ['lodgings'],
     queryFn: () => fetchLodgingList<T>(),
   });
 
