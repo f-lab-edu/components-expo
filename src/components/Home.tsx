@@ -44,7 +44,7 @@ export default function Home() {
     import('@/components/selectbox/mocks/data.json').then((res) => setData(res.default));
   }, []);
 
-  if (error) return <>Something Error happen</>;
+  if (error !== null) return <>Something Error happen</>;
 
   return (
     <main className="w-full h-full flex flex-col justify-center items-center space-y-32">
