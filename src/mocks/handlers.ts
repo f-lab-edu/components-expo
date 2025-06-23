@@ -21,16 +21,15 @@ export const handlers = [
   }),
 
   http.put('/api/lodgings', async ({ request }) => {
-    let mockLodgings = await import('@/mocks/lodgings.json').then((m) => m.default);
+    const mockLodgings = await import('@/mocks/lodgings.json').then((m) => m.default);
 
     const body = await request.json();
     const id = (body as UpdateRequest).id;
 
-    mockLodgings = mockLodgings.map((item) =>
-      item.id === id ? { ...item, isLiked: !item.isLiked } : item
-    );
+    const _filtered = mockLodgings.filter((item) => item.id === id)[0];
+    const updatedItem = { ..._filtered, isLiked: !_filtered.isLiked };
 
-    return HttpResponse.json({ data: mockLodgings, statusCode: 200, message: 'success' });
+    return HttpResponse.json({ data: updatedItem, statusCode: 200, message: 'success' });
   }),
 
   http.get('/api/movies', async () => {
