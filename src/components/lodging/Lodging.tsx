@@ -1,8 +1,9 @@
 import type { LodgingProps } from '@/components/lodging/types/lodging';
 import Heart from '@/components/lodging/assets/heart.svg';
 import FilledHeart from '@/components/lodging/assets/filledHeart.svg';
+import React from 'react';
 
-export default function Lodging({
+const Lodging = React.memo(function Lodging({
   id,
   days,
   image,
@@ -25,7 +26,7 @@ export default function Lodging({
       <div className="overflow-hidden relative rounded-xl">
         <img className="aspect-square" src={image} alt={`${title} image`} />
         {isGuestPreferred && (
-          <span className="absolute top-3 left-3 border w-20 p-1 rounded-2xl bg-neutral-100 text-center text-xs font-semibold">
+          <span className="absolute top-3 left-3 border w-20 p-1 rounded-2xla bg-neutral-100 text-center text-xs font-semibold">
             게스트 선호
           </span>
         )}
@@ -50,4 +51,11 @@ export default function Lodging({
       </div>
     </div>
   );
+},
+areEqual);
+
+function areEqual(prev: LodgingProps, next: LodgingProps) {
+  return prev.isLiked === next.isLiked;
 }
+
+export default Lodging;
