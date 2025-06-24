@@ -1,6 +1,6 @@
 import { useDebounce } from '@/hooks/useDebounceInput';
 import { useQuery } from '@tanstack/react-query';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const fetchPlaceList = async (query: string) => {
   const _formatted = encodeURIComponent(query);
@@ -16,8 +16,8 @@ export function useInputAutoComplete() {
   const [debouncedValue, setDebouncedValue] = useState('');
   const isComposingRef = useRef<boolean>(false);
 
-  const { data } = useQuery({
-    queryKey: ['places', debouncedValue],
+  const { data, refetch } = useQuery({
+    queryKey: ['places'],
     queryFn: () => fetchPlaceList(debouncedValue),
     enabled: debouncedValue.length > 0,
   });
@@ -46,6 +46,12 @@ export function useInputAutoComplete() {
     const value = (e.target as HTMLInputElement).value;
     handleChangeInput(value);
   };
+
+  useEffect(() => {
+    if (debouncedValue.length > 0) {
+      refetch();
+    }
+  }, [debouncedValue, refetch]);
 
   return { data, inputValue, handleChange, onCompositionStart, onCompositionEnd };
 }
