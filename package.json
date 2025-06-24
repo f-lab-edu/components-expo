@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
+    "@sentry/react": "^9.31.0",
+    "@sentry/tracing": "^7.120.3",
     "@tanstack/react-query": "^5.80.7",
     "@tanstack/react-query-devtools": "^5.80.7",
     "@types/react-slick": "^0.23.13",
