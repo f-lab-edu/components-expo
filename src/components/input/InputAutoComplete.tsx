@@ -1,4 +1,4 @@
-import { useInputAutoComplete } from '@/hooks/useInputAutoComplete';
+import { useInputAutoComplete } from '@/hooks/useInputAutoComplete.tsx';
 import { Suspense } from 'react';
 
 type InputAutoCompleteProps = {
