@@ -1,21 +1,14 @@
 import './global.css';
 import Home from './components/Home';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import LodgingTest from '@/components/lodging/LodgingTest';
+import { Route, Routes } from 'react-router-dom';
 
 function App() {
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        suspense: true,
-      },
-    },
-  });
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <Home />
-      </QueryClientProvider>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/test" element={<LodgingTest />} />
+    </Routes>
   );
 }
 
