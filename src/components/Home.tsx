@@ -5,7 +5,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import SearchBar from '@/components/searchbar/SearchBar';
 
 import Carousel from '@/components/carousel/Carousel';
-import { searchbarElements } from '@/components/searchbar/mocks/searchbar';
 import { useGetLodgingList } from '@/components/lodging/hooks/useGetLodgingList';
 import type { LodgingProps } from '@/components/lodging/types/lodging';
 import Lodging from '@/components/lodging/Lodging';
@@ -13,6 +12,7 @@ import SkeletonLodging from '@/components/lodging/SkeletonLodging';
 import { LODGING_WIDTH } from '@/components/lodging/constants/constant';
 import { useSkeletonUI } from '@/components/lodging/hooks/useSkeletonUI';
 import { useUpdateLodgingLike } from '@/components/lodging/hooks/useUpdateLodgingLike';
+import { searchbarElements } from '@/components/searchbar/constants/searchbar';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
