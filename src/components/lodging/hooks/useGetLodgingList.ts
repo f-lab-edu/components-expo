@@ -2,7 +2,7 @@ import type { ApiResponse } from '@/components/lodging/types/api';
 import { useQuery } from '@tanstack/react-query';
 
 const fetchLodgingList = async <T>(): Promise<ApiResponse<T>> => {
-  const response = await fetch('/api/lodgings');
+  const response = await fetch('/api/places');
   if (!response.ok) {
     const error = await response.json();
     throw error; // E 타입으로 핸들링.

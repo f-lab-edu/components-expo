@@ -7,7 +7,7 @@ type UseInfiniteScrollProps = {
 };
 
 const fetchLodgingList = async (pageParam: number) => {
-  const response = await fetch(`/api/lodgings?offset=${pageParam}`);
+  const response = await fetch(`/api/places?offset=${pageParam}`);
   const result = await response.json();
   return result;
 };

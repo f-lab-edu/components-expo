@@ -5,7 +5,7 @@ type UpdateRequest = {
 };
 
 export const handlers = [
-  http.get('/api/lodgings', async ({ request }) => {
+  http.get('/api/places', async ({ request }) => {
     const offset = parseInt(request.url.split('?offset=')?.[1]) || 0;
     const start = offset;
     const end = offset + 10;
@@ -20,7 +20,7 @@ export const handlers = [
     });
   }),
 
-  http.put('/api/lodgings', async ({ request }) => {
+  http.put('/api/places', async ({ request }) => {
     let mockLodgings = await import('@/mocks/lodgings.json').then((m) => m.default);
 
     const body = await request.json();

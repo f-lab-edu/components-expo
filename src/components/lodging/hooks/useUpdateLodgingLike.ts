@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 const updteLikeLodging = async (id: string): Promise<void> => {
-  const response = await fetch(`/api/lodgings`, {
+  const response = await fetch(`/api/places`, {
     method: 'PUT',
     body: JSON.stringify({ id }),
   });
