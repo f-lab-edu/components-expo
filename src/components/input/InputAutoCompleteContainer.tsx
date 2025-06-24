@@ -1,6 +1,6 @@
 import InputAutoComplete from '@/components/input/InputAutoComplete';
 import { Suspense } from 'react';
-import { ErrorBoundary } from 'react-error-boundary';
+import * as Sentry from '@sentry/react';
 
 type InputAutoCompleteContainerProps = {
   placeholder?: string;
@@ -10,10 +10,10 @@ export default function InputAutoCompleteContainer({
   placeholder,
 }: InputAutoCompleteContainerProps) {
   return (
-    <ErrorBoundary fallback={<>something error happen</>}>
+    <Sentry.ErrorBoundary fallback={<>something error happen</>}>
       <Suspense fallback={<div>Loading...</div>}>
         <InputAutoComplete placeholder={placeholder} />
       </Suspense>
-    </ErrorBoundary>
+    </Sentry.ErrorBoundary>
   );
 }
