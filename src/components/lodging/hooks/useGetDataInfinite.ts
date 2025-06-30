@@ -2,7 +2,9 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 
 type UseGetDataInfiniteProps = {
   queryKey: string[];
-  fetchFunc: (pageParam: number) => Promise<{ hasNext: boolean; nextOffset: number }>;
+  fetchFunc: (
+    pageParam: number
+  ) => Promise<{ hasNext: boolean; nextOffset: number; data: unknown }>;
 };
 
 export function useGetDataInfinite({ queryKey, fetchFunc }: UseGetDataInfiniteProps) {
