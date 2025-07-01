@@ -10,15 +10,13 @@ import { useGetLodgingList } from '@/components/lodging/hooks/useGetLodgingList'
 import type { LodgingProps } from '@/components/lodging/types/lodging';
 import Lodging from '@/components/lodging/Lodging';
 import SkeletonLodging from '@/components/lodging/SkeletonLodging';
-import { LODGING_WIDTH } from '@/components/lodging/constants/constant';
-import { useSkeletonUI } from '@/components/lodging/hooks/useSkeletonUI';
 import { useUpdateLodgingLike } from '@/components/lodging/hooks/useUpdateLodgingLike';
+import { GET_LODGING_COUNT } from '@/components/lodging/constants/constants';
 
 export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { lodgings, error, isLoading } = useGetLodgingList<LodgingProps>();
+  const { lodgings, error, isLoading } = useGetLodgingList<LodgingProps[]>();
   const { mutate: updateLikeLodging } = useUpdateLodgingLike();
-  const { skeletonCount } = useSkeletonUI({ containerRef, itemWidth: LODGING_WIDTH });
 
   const ref = useRef<HTMLSpanElement | null>(null);
   const [data, setData] = useState<RecommendPlaceResponse[]>([]);
@@ -44,7 +42,7 @@ export default function Home() {
     import('@/components/selectbox/mocks/data.json').then((res) => setData(res.default));
   }, []);
 
-  if (error) return <>Something Error happen</>;
+  if (error !== null) return <>Something Error happen</>;
 
   return (
     <main className="w-full h-full flex flex-col justify-center items-center space-y-32">
@@ -68,7 +66,7 @@ export default function Home() {
       <div className="w-[1400px] space-y-6" ref={containerRef}>
         <Carousel>
           {isLoading
-            ? Array.from({ length: skeletonCount }).map(() => <SkeletonLodging />)
+            ? Array.from({ length: GET_LODGING_COUNT }).map(() => <SkeletonLodging />)
             : lodgings.map((el) => {
                 return (
                   <li key={el.id}>

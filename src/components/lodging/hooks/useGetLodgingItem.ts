@@ -1,8 +1,8 @@
 import type { ApiResponse } from '@/components/lodging/types/api';
 import { useQuery } from '@tanstack/react-query';
 
-const fetchLodgingList = async <T>(): Promise<ApiResponse<T>> => {
-  const response = await fetch('/api/lodgings');
+const fetchLodgingList = async <T>(id: number): Promise<ApiResponse<T>> => {
+  const response = await fetch(`/api/lodgings?id=${id}`);
   if (!response.ok) {
     const error = await response.json();
     throw error; // E 타입으로 핸들링.
@@ -10,10 +10,10 @@ const fetchLodgingList = async <T>(): Promise<ApiResponse<T>> => {
   return response.json();
 };
 
-export function useGetLodgingList<T, E = Error>() {
+export function useGetLodgingItem<T, E = Error>(id: number) {
   const { data, ...rest } = useQuery<ApiResponse<T>, E>({
-    queryKey: ['lodgings'],
-    queryFn: () => fetchLodgingList<T>(),
+    queryKey: ['lodgings', id],
+    queryFn: () => fetchLodgingList<T>(id),
   });
 
   return {

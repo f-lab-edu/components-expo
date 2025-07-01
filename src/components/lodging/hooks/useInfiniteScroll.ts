@@ -1,5 +1,5 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useGetDataInfinite } from '@/components/lodging/hooks/useGetDataInfinite';
+import useIntersectionObserver from '@/components/lodging/hooks/useIntersectionObserver';
 
 type UseInfiniteScrollProps = {
   containerRef: React.RefObject<HTMLElement | null>;
@@ -13,32 +13,21 @@ const fetchLodgingList = async (pageParam: number) => {
 };
 
 export function useInfiniteScroll({ containerRef, targetRef }: UseInfiniteScrollProps) {
-  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useInfiniteQuery({
+  const { data, error, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetDataInfinite({
     queryKey: ['get-lodgings-infinite'],
-    queryFn: ({ pageParam = 0 }) => fetchLodgingList(pageParam),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage) => {
-      return lastPage.hasNext ? lastPage.nextOffset : undefined;
-    },
+    fetchFunc: fetchLodgingList,
   });
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      const observer = new IntersectionObserver(
-        (entries) => {
-          if (entries[0].isIntersecting && hasNextPage && !isFetchingNextPage) {
-            fetchNextPage();
-          }
-        },
-        { root: containerRef.current, threshold: 0.8 }
-      );
-
-      if (targetRef.current) observer.observe(targetRef.current);
-      return () => observer.disconnect();
-    }, 500);
-
-    return () => clearTimeout(timer);
-  }, [targetRef.current, hasNextPage, fetchNextPage]);
+  useIntersectionObserver({
+    containerRef,
+    targetRef,
+    onIntersect: () => {
+      if (hasNextPage && !isFetchingNextPage) {
+        fetchNextPage();
+      }
+    },
+    threshold: 0.75,
+  });
 
   return { lodging: data, error, fetchNextPage, hasNextPage, isFetchingNextPage };
 }
